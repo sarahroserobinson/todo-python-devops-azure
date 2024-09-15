@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
 
 to_do_list = []
+CORS(app)
 
 @app.get("/")
 def get_list():
