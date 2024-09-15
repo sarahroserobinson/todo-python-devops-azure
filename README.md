@@ -4,10 +4,10 @@ Brief description of project
 - Automation, monitoring and CI/CD pipelines with Docker, Azure
 
 Tools used
--Python
--Node.js
--Azure 
--Docker
+- Python
+- Node.js
+- Azure 
+- Docker
 
 Set up
--Installations 
+- Installations 
