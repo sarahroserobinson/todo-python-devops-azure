@@ -26,9 +26,12 @@ def get_list():
 
 @app.post("/")
 def add_to_do():
-    task = request.json.get('task')
-    to_do_list.append({'to_do': task})
-    return jsonify({'message': 'to do list updated'}), 201
+    task = request.form.get('task')
+    new_task = To_Do(task=task, complete=false)
+    db.session.add(new_task)
+    db.session.commit
+    return To_Do
+
 
 if __name__ == "__main__":
     app.run(debug=True)
