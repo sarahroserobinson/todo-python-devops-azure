@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>To-Do List</title>
+  </head>
+  <body>
+    <h1>Add your tasks that need doing</h1>
+    <ul>
+      {% for todo in todolist %}
+        <li>{{ todo.task }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

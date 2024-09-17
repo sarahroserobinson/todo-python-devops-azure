@@ -8,21 +8,21 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URL'] = 'postgresql://username:password@azurehost:portnum/to_do_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-to_do_list = []
-
 db.init_app(app)
 
 class To_Do(db.model):
     _tablename_ = 'tasks'
     id = db.Column(db.Integer, primary_key = True)
-    task_title = db.Column(db.String(100))
+    task = db.Column(db.String(100))
     done = db.Column(db.boolean)
+
 
 CORS(app)
 
 @app.get("/")
 def get_list():
-    return jsonify(to_do_list)
+    to_do_list =  To_Do.query.all()
+    
 
 @app.post("/")
 def add_to_do():
