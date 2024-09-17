@@ -7,7 +7,14 @@
     <ul>
       {% for todo in todolist %}
         <li>{{ todo.task }}</li>
-      {% endfor %}
+
+      {% if todo.done == False %}
+    <span>Not Complete</span>
+    {% else %}
+    <span>Completed</span>
+    {% endif %}
+
+    {% endfor %}
     </ul>
   </body>
 </html>

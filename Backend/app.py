@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 from sqlalchemy.sql import SQLAlchemy
 
@@ -22,7 +22,7 @@ CORS(app)
 @app.get("/")
 def get_list():
     to_do_list =  To_Do.query.all()
-    
+    return render_template("index.html", todo_list=to_do_list)
 
 @app.post("/")
 def add_to_do():
