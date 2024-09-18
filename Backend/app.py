@@ -27,11 +27,15 @@ def get_list():
 
 @app.post("/")
 def add_to_do():
-    task = request.form.get('task')
-    new_task = To_Do(task=task, complete=False)
-    db.session.add(new_task)
-    db.session.commit()
-    return "To Do list updated"
+    req = request.get_json()
+    task = req.get('task')
+    if task:
+        new_task = To_Do(task=task, done=False)
+        db.session.add(new_task)
+        db.session.commit()
+        return "To Do list updated"
+    else:   
+        return "Please provide task: None given", 400
 
 
 if __name__ == "__main__":

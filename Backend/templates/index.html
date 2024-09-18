@@ -5,13 +5,13 @@
   <body>
     <h1>Add your tasks that need doing</h1>
     <ul>
-      {% for todo in todolist %}
+      {% for todo in completed_list %}
         <li>{{ todo.task }}</li>
 
       {% if todo.done == False %}
-    <span>Not Complete</span>
+    <span>To do</span>
     {% else %}
-    <span>Completed</span>
+    <span>Done</span>
     {% endif %}
 
     {% endfor %}
