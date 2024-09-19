@@ -33,9 +33,17 @@ def add_to_do():
         new_task = To_Do(task=task, done=False)
         db.session.add(new_task)
         db.session.commit()
-        return "To Do list updated"
+        return "To Do list updated", 201
     else:   
         return "Please provide task: None given", 400
+
+@app.delete("/")
+def remove_task():
+    req = request.get_json()
+    task_to_delete = req.get('task')
+    db.session.delete(task_to_delete)
+    db.session.commit()
+    return "Task has been deleted", 200
 
 
 if __name__ == "__main__":
