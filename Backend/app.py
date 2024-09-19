@@ -26,6 +26,17 @@ def get_list():
     return render_template("index.html", completed_list=to_do_list)
 
 @app.post("/")
+def toggle_completed():
+    req = request.get_json()
+    task = req.get('task')
+    if task.done == False:
+        task.done == True
+        db.session.commit()
+    else:
+        task.done == False
+        db.session.commit()
+
+@app.post("/addtask")
 def add_to_do():
     req = request.get_json()
     task = req.get('task')
@@ -37,7 +48,7 @@ def add_to_do():
     else:   
         return "Please provide task: None given", 400
 
-@app.delete("/")
+@app.delete("/removetask")
 def remove_task():
     req = request.get_json()
     task_to_delete = req.get('task')
