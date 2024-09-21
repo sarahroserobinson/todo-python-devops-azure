@@ -4,7 +4,7 @@
   </head>
   <body>
     <h1>Add your tasks that need doing</h1>
-    <ul>
+    <ol>
       {% for todo in completed_list %}
         <li>{{ todo.task }}</li>
 
@@ -15,6 +15,6 @@
     {% endif %}
 
     {% endfor %}
-    </ul>
+    </ol>
   </body>
 </html>

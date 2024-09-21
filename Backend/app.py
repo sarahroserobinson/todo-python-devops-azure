@@ -25,16 +25,19 @@ def get_list():
     to_do_list =  To_Do.query.all()
     return render_template("index.html", completed_list=to_do_list)
 
-@app.post("/")
+@app.post("/toggle")
 def toggle_completed():
     req = request.get_json()
-    task = req.get('task')
-    if task.done == False:
-        task.done == True
+    task_id = req.get('id')
+    task_id_num = int(task_id)
+    print(f"Received task ID: {task_id}") 
+    task = To_Do.query.get(task_id_num)
+    if task:
+        task.done = not task.done
         db.session.commit()
+        return "Task updated", 200
     else:
-        task.done == False
-        db.session.commit()
+        return "That task isn't included in the list", 404
 
 @app.post("/addtask")
 def add_to_do():
@@ -51,7 +54,9 @@ def add_to_do():
 @app.delete("/removetask")
 def remove_task():
     req = request.get_json()
-    task_to_delete = req.get('task')
+    task2 = req.get('task')
+    to_do = To_Do()
+    task_to_delete = db.session.query(to_do)
     db.session.delete(task_to_delete)
     db.session.commit()
     return "Task has been deleted", 200
