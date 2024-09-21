@@ -54,12 +54,13 @@ def add_to_do():
 @app.delete("/removetask")
 def remove_task():
     req = request.get_json()
-    task2 = req.get('task')
-    to_do = To_Do()
-    task_to_delete = db.session.query(to_do)
+    task_id = req.get('id')
+    task_id_num = int(task_id)
+
+    task_to_delete = To_Do.query.get(task_id_num)
     db.session.delete(task_to_delete)
     db.session.commit()
-    return "Task has been deleted", 200
+    return f"Task {task_id} has been deleted", 200
 
 
 if __name__ == "__main__":
